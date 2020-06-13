@@ -1,0 +1,60 @@
+<div class="container">
+    <h1>Email Sender</h1>
+
+    <form (ngSubmit)="onSubmit()" #emailForm="ngForm">
+        <div class="form-group">
+            <label for="name">To</label>
+            <input type="email" class="form-control" id="to" required [(ngModel)]="model.to" name="to" #to="ngModel" email/>
+        </div>
+        <div class="md-errors-spacer" [hidden]="to.valid || to.untouched">
+            <div *ngIf="to.errors && to.errors.required" class="alert alert-danger">
+                Email is required
+            </div>
+            <div *ngIf="to.errors && to.errors.email" class="alert alert-danger">
+                Email is invalid
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name">CC</label>
+            <input type="email" class="form-control" id="cc" [(ngModel)]="model.cc" #cc="ngModel" name="cc"  email/>
+        </div>
+        <div class="md-errors-spacer" [hidden]="cc.valid || cc.untouched || !cc.length">
+            <div *ngIf="cc.errors && cc.errors.email" class="alert alert-danger">
+                Email is invalid
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name">BCC</label>
+            <input type="email" class="form-control" id="bcc" [(ngModel)]="model.bcc" #bcc="ngModel" name="bcc" email/>
+        </div>
+        <div class="md-errors-spacer" [hidden]="bcc.valid || bcc.untouched || !bcc.length">
+            <div *ngIf="bcc.errors && bcc.errors.email" class="alert alert-danger">
+                Email is invalid
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Subject</label>
+            <input type="text" class="form-control" id="subject" [(ngModel)]="model.subject" name="subject" />
+        </div>
+
+        <div class="form-group">
+            <label for="name">Message</label>
+            <input type="text" class="form-control" id="message" [(ngModel)]="model.message" name="message" />
+        </div>
+
+        <div *ngIf="response">
+           Sent mail status - {{response}}
+        </div>
+        <div *ngIf="error">
+           Error - {{error}}
+        </div>
+        <br />
+
+        <button type="submit" class="btn btn-success" >Send</button>       
+
+    </form>
+    </div>
+
